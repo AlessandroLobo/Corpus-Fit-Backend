@@ -5,12 +5,15 @@ export class CreateUsersController {
   async handle(request: Request, response: Response) {
     const createUsersUseCase = new CreateUsersUseCase()
 
-    const { username, password, expiration_date } = request.body
+    const { email, password, createdAt, planId } = request.body
+
+    console.log("Dados recebidos do cliente:", email, password, createdAt, planId)
 
     const result = await createUsersUseCase.execute({
-      username,
+      email,
       password,
-      expiration_date,
+      createdAt,
+      planId,
     })
     return response.status(201).json(result)
   }

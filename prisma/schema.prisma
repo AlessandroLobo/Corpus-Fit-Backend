@@ -9,3 +9,32 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+// Arquivo: schema.prisma
+
+// Definição do modelo do usuário, incluindo informações de login e detalhes do plano
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  plan      Plan     @relation(fields: [planId], references: [id])
+  planId    String
+  createdAt DateTime @default(now())
+  // // Campos adicionais que você pode querer adicionar para rastrear as atividades do usuário
+  // workouts Workout[]
+  // logs     Log[]
+
+  @@map("users")
+}
+
+// Definição do modelo de plano, que inclui informações sobre o período de tempo para o qual o usuário tem acesso
+model Plan {
+  id        String   @id @default(cuid())
+  name      String
+  duration  Int // Duração em dias do plano
+  price     Float // Preço em reais do plano
+  createdAt DateTime @default(now())
+
+  // Relacionamento com usuários que têm este plano
+  users User[]
+}

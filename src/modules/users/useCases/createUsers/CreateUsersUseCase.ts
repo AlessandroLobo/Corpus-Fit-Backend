@@ -1,19 +1,18 @@
 import { prisma } from '../../../../database/prismaClient'
 import { hash } from 'bcryptjs'
 interface ICreateUsers {
-  username: string
+  email: string
   password: string
-  expiration_date: Date
+  createdAt: Date
+  planId?: string
 }
 
 export class CreateUsersUseCase {
-  async execute({ password, username, expiration_date }: ICreateUsers) {
+  async execute({ email, password, createdAt, planId }: ICreateUsers) {
     // Validar se o usuário existe
-    const userAlreadyExists = await prisma.users.findFirst({
+    const userAlreadyExists = await prisma.user.findFirst({
       where: {
-        username: {
-          mode: 'insensitive',
-        },
+        email,
       },
     })
 
@@ -25,11 +24,12 @@ export class CreateUsersUseCase {
     const passwordHash = await hash(password, 10)
 
     // salvar o usuário
-    const user = await prisma.users.create({
+    const user = await prisma.user.create({
       data: {
-        username,
+        email,
         password: passwordHash,
-        expiration_date,
+        createdAt,
+        planId: planId?.toString() || '1',
       },
     })
     return user
