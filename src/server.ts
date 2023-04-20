@@ -1,8 +1,12 @@
 import express, { NextFunction, Request, Response, } from 'express'
 import 'express-async-errors'
 import { routes } from './routes'
+const cors = require('cors');
 
 const app = express()
+
+// Configuração do CORS
+app.use(cors());
 
 app.use(express.json())
 
