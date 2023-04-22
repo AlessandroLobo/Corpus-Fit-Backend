@@ -5,7 +5,6 @@ export class FindUsersController {
   async handle(request: Request, response: Response) {
     const token = request.headers.authorization
 
-    console.log('Token received in controller:', token);
 
     if (!token) {
       return response.status(401).json({ error: 'Token is missing' })

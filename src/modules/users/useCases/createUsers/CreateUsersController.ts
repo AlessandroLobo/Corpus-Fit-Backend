@@ -7,7 +7,6 @@ export class CreateUsersController {
 
     const { email, password, createdAt, planId } = request.body
 
-    console.log("Dados recebidos do cliente:", email, password, createdAt, planId)
 
     const result = await createUsersUseCase.execute({
       email,

@@ -9,9 +9,6 @@ interface IAuthenticateUserUser {
 
 export class AuthenticateUserCase {
   async execute({ email, password }: IAuthenticateUserUser) {
-    // Receiver username, password
-    console.log('Password received:', email, password);
-    // Verify an username as registered
     const user = await prisma.user.findFirst({
       where: {
         email

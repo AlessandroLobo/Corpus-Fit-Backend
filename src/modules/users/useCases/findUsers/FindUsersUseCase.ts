@@ -7,22 +7,24 @@ interface IFindUsersUserCase {
 
 export class FindUsersUserCase {
   async execute({ token }: IFindUsersUserCase) {
-    console.log(token);
 
     if (!token) {
       throw new Error('Token is missing')
     }
 
     try {
-      console.log('JWT_SECRET:', process.env.JWT_SECRET)
       const decoded = verify(token.replace('Bearer ', ''), process.env.JWT_SECRET!, {
         algorithms: ['HS256'],
       } as VerifyOptions) as JwtPayload
-      console.log('Decoded token:', decoded)
 
       const user = await prisma.user.findFirst({
         where: {
           email: decoded.email
+        },
+        select: {
+          id: true,
+          email: true,
+          // outros campos se precisarem retornar
         }
       })
 
