@@ -6,7 +6,11 @@ const cors = require('cors');
 const app = express()
 
 // Configuração do CORS
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  Credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+}));
 
 app.use(express.json())
 
@@ -14,19 +18,28 @@ app.use(routes)
 
 const port = 3333
 
-app.use((err, request: Request, response: Response, next: NextFunction) => {
+export function errorHandler(
+  err: Error,
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
+  if (!request.headers.authorization) {
+    return response.status(401).json({ error: 'Token is missing' })
+  }
+
   if (err instanceof Error) {
     return response.status(400).json({
       error: err.message
     });
   }
+
   return response.status(500).json({
     status: 'error',
     message: 'Internal Server Error',
   });
-});
-
+}
 
 app.listen(port, () => {
-  console.log('Server is running on port' + port)
+  console.log('Server is running in url: http://localhost:' + port)
 })
