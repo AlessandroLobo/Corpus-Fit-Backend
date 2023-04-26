@@ -14,15 +14,23 @@ datasource db {
 
 // Definição do modelo do usuário, incluindo informações de login e detalhes do plano
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  plan      Plan     @relation(fields: [planId], references: [id])
-  planId    String
-  createdAt DateTime @default(now())
-  // // Campos adicionais que você pode querer adicionar para rastrear as atividades do usuário
-  // workouts Workout[]
-  // logs     Log[]
+  id         String   @id @default(cuid())
+  name       String   @default("N/A")
+  cpf        String   @unique
+  email      String   @unique
+  password   String   @default("N/A")
+  birth_date DateTime @default(now())
+  weight     String   @default("N/A")
+  gender     String   @default("N/A")
+  phone      String   @default("N/A")
+  CEP        String   @default("N/A")
+  city       String   @default("N/A")
+  address    String   @default("N/A")
+  number     String   @default("N/A")
+  state      String   @default("N/A")
+  planId     String?
+  createdAt  DateTime @default(now())
+  Plan       Plan?    @relation(fields: [planId], references: [id])
 
   @@map("users")
 }
