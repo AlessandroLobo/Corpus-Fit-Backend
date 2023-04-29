@@ -3,7 +3,6 @@ import { ListPlansUseCase } from './ListPlansUseCase';
 
 export class ListPlansController {
   async handle(request: Request, response: Response) {
-    console.log('Controler')
 
     try {
       const listPlansUseCase = new ListPlansUseCase();

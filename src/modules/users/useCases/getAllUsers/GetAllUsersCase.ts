@@ -9,7 +9,6 @@ interface GetAllUsersCaseProps {
 
 export class GetAllUsersCase {
   async execute({ name, email }: GetAllUsersCaseProps) {
-    console.log(email)
 
     const users = await prisma.user.findMany({
       where: {

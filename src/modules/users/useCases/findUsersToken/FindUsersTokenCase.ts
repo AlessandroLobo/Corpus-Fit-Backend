@@ -1,12 +1,12 @@
 import { prisma } from "../../../../database/prismaClient";
 import { verify, JwtPayload, VerifyOptions } from 'jsonwebtoken'
 
-interface IFindUsersUserCase {
+interface IFindUsersUserTokenCase {
   token: string;
 }
 
-export class FindUsersUserCase {
-  async execute({ token }: IFindUsersUserCase) {
+export class FindUsersUserTokenCase {
+  async execute({ token }: IFindUsersUserTokenCase) {
 
     if (!token) {
       throw new Error('Token is missing')

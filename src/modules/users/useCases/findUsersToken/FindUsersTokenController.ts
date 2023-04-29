@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
-import { FindUsersUserCase } from './FindUsersUseCase'
+import { FindUsersUserTokenCase } from './FindUsersTokenCase'
 
-export class FindUsersController {
+export class FindUsersTokenController {
   async handle(request: Request, response: Response) {
     const token = request.headers.authorization
 
@@ -11,7 +11,7 @@ export class FindUsersController {
     }
 
     try {
-      const findUsersUserCase = new FindUsersUserCase()
+      const findUsersUserCase = new FindUsersUserTokenCase()
       const result = await findUsersUserCase.execute({
         token: String(token)
       })
