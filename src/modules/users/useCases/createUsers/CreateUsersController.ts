@@ -25,13 +25,13 @@ export class CreateUsersController {
         createdAt
       } = request.body;
 
-      // Verificar se a data de nascimento é válida
-      if (!dayjs(birthDate, 'DD/MM/YYYY').isValid()) {
-        return response.status(400).json({ message: 'Invalid birth date' });
-      }
+      // // Verificar se a data de nascimento é válida
+      // if (!dayjs(birthDate, 'DD/MM/YYYY').isValid()) {
+      //   return response.status(400).json({ message: 'Invalid birth date' });
+      // }
 
-      const formattedBirthDate = dayjs(birthDate, 'DD/MM/YYYY').toISOString();
-      const formattedCreatedAt = dayjs(createdAt, 'DD/MM/YYYY HH:mm:ss').toISOString();
+      // const formattedBirthDate = dayjs(birthDate, 'DD/MM/YYYY').toISOString();
+      // const formattedCreatedAt = dayjs(createdAt, 'DD/MM/YYYY HH:mm:ss').toISOString();
 
 
       const result = await createUsersUseCase.execute({
@@ -39,7 +39,7 @@ export class CreateUsersController {
         cpf,
         email,
         password,
-        birthDate: formattedBirthDate,
+        birthDate: birthDate,
         weight,
         gender,
         phone,
@@ -49,7 +49,7 @@ export class CreateUsersController {
         number,
         state,
         planId,
-        createdAt: formattedCreatedAt,
+        createdAt: createdAt,
       });
 
       return response.status(201).json(result);

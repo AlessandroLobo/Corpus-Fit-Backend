@@ -11,7 +11,11 @@ export class FindUserUseCase {
       where: {
         id,
       },
+      include: {
+        Plan: true // inclui os dados do plano relacionado
+      }
     });
+
     return student;
   }
 }
