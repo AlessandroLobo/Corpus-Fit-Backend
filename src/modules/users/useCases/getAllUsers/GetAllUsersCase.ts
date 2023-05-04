@@ -9,7 +9,6 @@ interface GetAllUsersCaseProps {
 
 export class GetAllUsersCase {
   async execute({ name, email, limit = 10, offset = 0 }: GetAllUsersCaseProps) {
-    console.log(offset)
     const users = await prisma.user.findMany({
       where: {
         AND: [

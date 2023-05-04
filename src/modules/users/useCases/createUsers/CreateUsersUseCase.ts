@@ -23,7 +23,7 @@ interface ICreateUsers {
   number: string;
   state: string;
   planId: string;
-  createdAt: string; // Alterado para string
+  createdAt: string;
 }
 
 export class CreateUsersUseCase {

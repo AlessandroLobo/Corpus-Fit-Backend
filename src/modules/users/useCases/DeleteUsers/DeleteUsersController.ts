@@ -4,7 +4,6 @@ import { DeleteUsersUseCase } from './DeleteUsersUseCase';
 
 export class DeleteUsersController {
   async handle(request: Request, response: Response) {
-    console.log(request.params.id)
     try {
       const deleteUsersUseCase = new DeleteUsersUseCase();
 

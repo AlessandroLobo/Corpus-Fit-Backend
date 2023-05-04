@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { CreateUsersUseCase } from './CreateUsersUseCase';
-import dayjs from 'dayjs';
 
 export class CreateUsersController {
   async handle(request: Request, response: Response) {
@@ -24,15 +23,6 @@ export class CreateUsersController {
         planId,
         createdAt
       } = request.body;
-
-      // // Verificar se a data de nascimento é válida
-      // if (!dayjs(birthDate, 'DD/MM/YYYY').isValid()) {
-      //   return response.status(400).json({ message: 'Invalid birth date' });
-      // }
-
-      // const formattedBirthDate = dayjs(birthDate, 'DD/MM/YYYY').toISOString();
-      // const formattedCreatedAt = dayjs(createdAt, 'DD/MM/YYYY HH:mm:ss').toISOString();
-
 
       const result = await createUsersUseCase.execute({
         name,
