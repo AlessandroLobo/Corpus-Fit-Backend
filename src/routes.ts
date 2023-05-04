@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { CreateUsersController } from './modules/users/useCases/createUsers/CreateUsersController';
+import { UpdateUsersController } from './modules/users/useCases/UpdateUsers/UpdateUsersController';
 import { AuthenticateUsersController } from './modules/account/authenticateUser/AuthenticateUserController';
 import { FindUsersTokenController } from './modules/users/useCases/findUsersToken/FindUsersTokenController';
 import { ListPlansController } from './modules/plans/listPlans/ListPlansController';
@@ -9,6 +10,7 @@ import { FindUserController } from './modules/users/useCases/findUser/FindUserCo
 const routes = Router();
 
 const createUsersController = new CreateUsersController();
+const updateUsersController = new UpdateUsersController();
 const authenticateUsersController = new AuthenticateUsersController();
 const findUsersController = new FindUserController();
 const findUsersTokenController = new FindUsersTokenController();
@@ -18,6 +20,8 @@ const getAllUsersController = new GetAllUsersController();
 routes.post('/authenticate/', authenticateUsersController.handle);
 
 routes.post('/users/', createUsersController.handle);
+
+routes.put('/users/update', updateUsersController.handle);
 
 routes.get('/users/find', findUsersTokenController.handle);
 
