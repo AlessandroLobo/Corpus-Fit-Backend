@@ -8,7 +8,7 @@ const timezone = require('dayjs/plugin/timezone');
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-interface ICreateUsers {
+interface IUpdateUsers {
   id: string;
   name: string;
   cpf: string;
@@ -45,7 +45,7 @@ export class UpdateUsersUseCase {
     state,
     planId,
     createdAt,
-  }: ICreateUsers) {
+  }: IUpdateUsers) {
     console.log('PlanId=====', planId);
     // Validar se o usuário existe
     const userAlreadyExists = await prisma.user.findUnique({

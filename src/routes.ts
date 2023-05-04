@@ -6,11 +6,13 @@ import { FindUsersTokenController } from './modules/users/useCases/findUsersToke
 import { ListPlansController } from './modules/plans/listPlans/ListPlansController';
 import { GetAllUsersController } from './modules/users/useCases/getAllUsers/GetAllUsersController';
 import { FindUserController } from './modules/users/useCases/findUser/FindUserController';
+import { DeleteUsersController } from './modules/users/useCases/DeleteUsers/DeleteUsersController';
 
 const routes = Router();
 
 const createUsersController = new CreateUsersController();
 const updateUsersController = new UpdateUsersController();
+const deleteUsersController = new DeleteUsersController
 const authenticateUsersController = new AuthenticateUsersController();
 const findUsersController = new FindUserController();
 const findUsersTokenController = new FindUsersTokenController();
@@ -22,6 +24,8 @@ routes.post('/authenticate/', authenticateUsersController.handle);
 routes.post('/users/', createUsersController.handle);
 
 routes.put('/users/update', updateUsersController.handle);
+
+routes.delete('/users/delete/:id', deleteUsersController.handle);
 
 routes.get('/users/find', findUsersTokenController.handle);
 

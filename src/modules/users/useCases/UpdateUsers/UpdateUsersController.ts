@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import dayjs from 'dayjs';
 import { UpdateUsersUseCase } from './UpdateUsersUseCase';
 
 export class UpdateUsersController {
