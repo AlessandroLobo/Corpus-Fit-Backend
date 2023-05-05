@@ -7,6 +7,8 @@ import { ListPlansController } from './modules/plans/listPlans/ListPlansControll
 import { GetAllUsersController } from './modules/users/useCases/getAllUsers/GetAllUsersController';
 import { FindUserController } from './modules/users/useCases/findUser/FindUserController';
 import { DeleteUsersController } from './modules/users/useCases/DeleteUsers/DeleteUsersController';
+import { CreatePlansController } from './modules/plans/createPlans/CreatePlansController';
+import { FindPlanController } from './modules/plans/findPlan/FindPlanController';
 
 const routes = Router();
 
@@ -16,8 +18,10 @@ const deleteUsersController = new DeleteUsersController
 const authenticateUsersController = new AuthenticateUsersController();
 const findUsersController = new FindUserController();
 const findUsersTokenController = new FindUsersTokenController();
+const findPlansController = new FindPlanController();
 const listPlansController = new ListPlansController();
 const getAllUsersController = new GetAllUsersController();
+const createPlansController = new CreatePlansController();
 
 routes.post('/authenticate/', authenticateUsersController.handle);
 
@@ -35,5 +39,9 @@ routes.get('/users/findUser/:id', findUsersController.handle);
 routes.get('/plans/listPlans', listPlansController.handle);
 
 routes.get('/users/listStudents', getAllUsersController.handle);
+
+routes.post('/plans/createPlans', createPlansController.handle);
+
+routes.get('/plans/findPlan', findPlansController.handle);
 
 export { routes };
