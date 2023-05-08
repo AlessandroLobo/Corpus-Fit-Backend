@@ -21,7 +21,6 @@ export class FindPlanUseCase {
         name: 'asc'
       },
     });
-    console.log(plans)
 
     return { plans };
   }
