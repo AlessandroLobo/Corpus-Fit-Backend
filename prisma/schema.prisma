@@ -11,23 +11,24 @@ datasource db {
 
 // Definição do modelo do usuário, incluindo informações de login e detalhes do plano
 model User {
-  id        String   @id @default(cuid())
-  name      String   @default("N/A")
-  cpf       String   @unique
-  email     String   @unique
-  password  String   @default("N/A")
-  birthDate DateTime
-  weight    String   @default("N/A")
-  gender    String   @default("N/A")
-  phone     String   @default("N/A")
-  CEP       String   @default("N/A")
-  city      String   @default("N/A")
-  address   String   @default("N/A")
-  number    String   @default("N/A")
-  state     String   @default("N/A")
-  planId    String?
-  createdAt DateTime @default(now())
-  Plan      Plan?    @relation(fields: [planId], references: [id])
+  id          String        @id @default(cuid())
+  name        String        @default("N/A")
+  cpf         String        @unique
+  email       String        @unique
+  password    String        @default("N/A")
+  birthDate   DateTime
+  weight      String        @default("N/A")
+  gender      String        @default("N/A")
+  phone       String        @default("N/A")
+  CEP         String        @default("N/A")
+  city        String        @default("N/A")
+  address     String        @default("N/A")
+  number      String        @default("N/A")
+  state       String        @default("N/A")
+  planId      String?
+  createdAt   DateTime      @default(now())
+  Plan        Plan?         @relation(fields: [planId], references: [id])
+  StudentPlan StudentPlan[]
 
   @@map("users")
 }
@@ -41,5 +42,24 @@ model Plan {
   createdAt DateTime @default(now())
 
   // Relacionamento com usuários que têm este plano
-  users User[]
+  users       User[]
+  StudentPlan StudentPlan[]
+
+  @@map("plans")
+}
+
+// Definição do modelo de associação entre aluno e plano
+model StudentPlan {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  dueData   DateTime
+  planValue Float
+  // Chave estrangeira para o modelo User
+  userId    String
+  User      User     @relation(fields: [userId], references: [id])
+  // Chave estrangeira para o modelo Plan
+  planId    String
+  Plan      Plan     @relation(fields: [planId], references: [id])
+
+  @@map("student_plans")
 }
