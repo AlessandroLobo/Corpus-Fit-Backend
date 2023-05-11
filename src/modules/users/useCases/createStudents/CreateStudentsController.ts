@@ -1,17 +1,18 @@
 import { Request, Response } from 'express';
-import { CreateUsersUseCase } from './CreateUsersUseCase';
+import { CreateStudentsUseCase } from './CreateStudentsUseCase';
 
-export class CreateUsersController {
+export class CreateStudentsController {
   async handle(request: Request, response: Response) {
     try {
-      const createUsersUseCase = new CreateUsersUseCase();
+      const createStudentsUseCase = new CreateStudentsUseCase();
 
       const {
         name,
-        cpf,
         email,
         password,
         birthDate,
+        cpf,
+        status,
         weight,
         gender,
         phone,
@@ -24,11 +25,12 @@ export class CreateUsersController {
         createdAt
       } = request.body;
 
-      const result = await createUsersUseCase.execute({
+      const result = await createStudentsUseCase.execute({
         name,
-        cpf,
         email,
         password,
+        cpf,
+        status,
         birthDate: birthDate,
         weight,
         gender,

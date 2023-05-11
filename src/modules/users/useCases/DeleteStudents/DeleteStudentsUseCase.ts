@@ -1,15 +1,15 @@
 import { prisma } from '../../../../database/prismaClient';
 
-interface IDeleteUsers {
+interface IDeleteStudents {
   id: string;
 }
-export class DeleteUsersUseCase {
+export class DeleteStudentsUseCase {
   async delete(id: string) {
-    const user = await prisma.user.delete({
+    const student = await prisma.student.delete({
       where: {
         id,
       },
     });
-    return user;
+    return student;
   }
 }

@@ -1,16 +1,18 @@
 import { Request, Response } from 'express';
-import { UpdateUsersUseCase } from './UpdateUsersUseCase';
+import { UpdateStudentsUseCase } from './UpdateStudentsUseCase';
 
-export class UpdateUsersController {
+export class UpdateStudentsController {
   async handle(request: Request, response: Response) {
+    console.log(request.body)
     try {
-      const updateUsersUseCase = new UpdateUsersUseCase();
+      const updateStudentsUseCase = new UpdateStudentsUseCase();
 
       const {
         id,
         name,
         cpf,
         email,
+        status,
         password,
         birthDate,
         weight,
@@ -27,11 +29,12 @@ export class UpdateUsersController {
 
       console.log(request.body);
 
-      const result = await updateUsersUseCase.execute({
+      const result = await updateStudentsUseCase.execute({
         id,
         name,
         cpf,
         email,
+        status,
         password,
         birthDate: birthDate,
         weight,

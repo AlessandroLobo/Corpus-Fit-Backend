@@ -1,13 +1,13 @@
 import { prisma } from "../../../../database/prismaClient";
 
-interface FindUserUseCaseProps {
+interface FindStudentUseCaseProps {
   id: string;
 }
 
-export class FindUserUseCase {
-  async execute({ id }: FindUserUseCaseProps) {
+export class FindStudentUseCase {
+  async execute({ id }: FindStudentUseCaseProps) {
 
-    const student = await prisma.user.findUnique({
+    const student = await prisma.student.findUnique({
       where: {
         id,
       },

@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
-import { FindUserUseCase } from './FindUserUseCase';
+import { FindStudentUseCase } from './FindStudentUseCase';
 
-export class FindUserController {
+export class FindStudentController {
   async handle(request: Request, response: Response) {
     try {
       const { id } = request.params;
 
-      const findUserUseCase = new FindUserUseCase();
+      const findStudentUseCase = new FindStudentUseCase();
 
-      const user = await findUserUseCase.execute({ id });
+      const student = await findStudentUseCase.execute({ id });
 
-      return response.status(200).json(user);
+      return response.status(200).json(student);
     } catch (error) {
       return response.status(400).json({
         message: error.message || 'Unexpected error.',

@@ -10,12 +10,13 @@ datasource db {
 }
 
 // Definição do modelo do usuário, incluindo informações de login e detalhes do plano
-model User {
+model Student {
   id          String        @id @default(cuid())
   name        String        @default("N/A")
   cpf         String        @unique
   email       String        @unique
   password    String        @default("N/A")
+  status      Boolean       @default(true)
   birthDate   DateTime
   weight      String        @default("N/A")
   gender      String        @default("N/A")
@@ -25,12 +26,13 @@ model User {
   address     String        @default("N/A")
   number      String        @default("N/A")
   state       String        @default("N/A")
-  planId      String?
   createdAt   DateTime      @default(now())
-  Plan        Plan?         @relation(fields: [planId], references: [id])
   StudentPlan StudentPlan[]
+  Plan        Plan?         @relation(fields: [planId], references: [id])
+  planId      String?
+  Financial   Financial[]
 
-  @@map("users")
+  @@map("students")
 }
 
 // Definição do modelo de plano, que inclui informações sobre o período de tempo para o qual o usuário tem acesso
@@ -42,24 +44,40 @@ model Plan {
   createdAt DateTime @default(now())
 
   // Relacionamento com usuários que têm este plano
-  users       User[]
+  students    Student[]
   StudentPlan StudentPlan[]
 
   @@map("plans")
 }
 
-// Definição do modelo de associação entre aluno e plano
+// Definição do modelo de associação entre estudante e plano
 model StudentPlan {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  dueData   DateTime
-  planValue Float
-  // Chave estrangeira para o modelo User
-  userId    String
-  User      User     @relation(fields: [userId], references: [id])
+  id         String      @id @default(cuid())
+  createdAt  DateTime    @default(now())
+  dueDate    DateTime
+  planValue  Float
+  // Chave estrangeira para o modelo Student
+  studentId  String // Renomeado de userId para studentId
+  student    Student     @relation(fields: [studentId], references: [id])
   // Chave estrangeira para o modelo Plan
-  planId    String
-  Plan      Plan     @relation(fields: [planId], references: [id])
+  planId     String
+  plan       Plan        @relation(fields: [planId], references: [id])
+  financials Financial[]
 
   @@map("student_plans")
+}
+
+// Definição do modelo financeiro
+model Financial {
+  id            String       @id @default(cuid())
+  studentId     String
+  student       Student      @relation(fields: [studentId], references: [id])
+  paymentDate   DateTime
+  paymentType   String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  StudentPlan   StudentPlan? @relation(fields: [studentPlanId], references: [id])
+  studentPlanId String?
+
+  @@map("financials")
 }

@@ -1,15 +1,17 @@
 import { prisma } from "../../../../database/prismaClient";
 
-interface GetAllUsersCaseProps {
+interface GetAllStudentsCaseProps {
   name?: string;
   email?: string;
   limit?: number;
   offset?: number;
 }
 
-export class GetAllUsersCase {
-  async execute({ name, email, limit = 10, offset = 0 }: GetAllUsersCaseProps) {
-    const users = await prisma.user.findMany({
+export class GetAllStudentsCase {
+  async execute({ name, email, limit = 10, offset = 0 }: GetAllStudentsCaseProps) {
+    console.log(name)
+
+    const users = await prisma.student.findMany({
       where: {
         AND: [
           {
@@ -32,8 +34,8 @@ export class GetAllUsersCase {
     return { users, total: count };
   }
 
-  async countUsers({ name, email }: GetAllUsersCaseProps) {
-    const count = await prisma.user.count({
+  async countUsers({ name, email }: GetAllStudentsCaseProps) {
+    const count = await prisma.student.count({
       where: {
         AND: [
           {

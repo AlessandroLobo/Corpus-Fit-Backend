@@ -1,15 +1,15 @@
 import { Request, Response } from 'express'
-import { GetAllUsersCase } from './GetAllUsersCase'
+import { GetAllStudentsCase } from './GetAllStudentsCase';
 
 
 
-export class GetAllUsersController {
+export class GetAllStudentsController {
   async handle(request: Request, response: Response) {
     const { name, email, limit, offset } = request.query;
-
+    console.log(name)
     try {
-      const getAllUsersCase = new GetAllUsersCase();
-      const result = await getAllUsersCase.execute({
+      const getAllStudentsCase = new GetAllStudentsCase();
+      const result = await getAllStudentsCase.execute({
         name: name ? String(name) : undefined,
         email: email !== "" ? String(email) : undefined,
         limit: Number(limit) || 10,

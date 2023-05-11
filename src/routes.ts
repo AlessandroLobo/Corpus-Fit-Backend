@@ -2,11 +2,11 @@ import { Router } from 'express';
 import { AuthenticateUsersController } from './modules/account/authenticateUser/AuthenticateUserController';
 import { FindUsersTokenController } from './modules/users/useCases/findUsersToken/FindUsersTokenController';
 
-import { CreateUsersController } from './modules/users/useCases/createUsers/CreateUsersController';
-import { UpdateUsersController } from './modules/users/useCases/UpdateUsers/UpdateUsersController';
-import { GetAllUsersController } from './modules/users/useCases/getAllUsers/GetAllUsersController';
-import { FindUserController } from './modules/users/useCases/findUser/FindUserController';
-import { DeleteUsersController } from './modules/users/useCases/DeleteUsers/DeleteUsersController';
+import { CreateStudentsController } from './modules/users/useCases/createStudents/CreateStudentsController';
+import { UpdateStudentsController } from './modules/users/useCases/UpdateUsers/UpdateStudentsController';
+import { GetAllStudentsController } from './modules/users/useCases/getAllStudents/GetAllStudentsController';
+import { FindStudentController } from './modules/users/useCases/findStudent/FindStudentController';
+import { DeleteStudentsController } from './modules/users/useCases/DeleteStudents/DeleteStudentsController';
 
 import { CreatePlansController } from './modules/plans/createPlans/CreatePlansController';
 import { FindPlanController } from './modules/plans/findPlan/FindPlanController';
@@ -19,11 +19,11 @@ const routes = Router();
 const authenticateUsersController = new AuthenticateUsersController();
 const findUsersTokenController = new FindUsersTokenController();
 
-const createUsersController = new CreateUsersController();
-const updateUsersController = new UpdateUsersController();
-const deleteUsersController = new DeleteUsersController();
-const findUsersController = new FindUserController();
-const getAllUsersController = new GetAllUsersController();
+const createStudentsController = new CreateStudentsController();
+const updateStudentsController = new UpdateStudentsController();
+const deleteStudentsController = new DeleteStudentsController();
+const findStudentController = new FindStudentController();
+const getAllStudentsController = new GetAllStudentsController();
 
 const findPlansController = new FindPlanController();
 const listPlansController = new ListPlansController();
@@ -33,17 +33,17 @@ const deletePlansController = new DeletePlansController();
 
 routes.post('/authenticate/', authenticateUsersController.handle);
 
-routes.post('/users/', createUsersController.handle);
+routes.post('/students/', createStudentsController.handle);
 
-routes.put('/users/update', updateUsersController.handle);
+routes.put('/student/update', updateStudentsController.handle);
 
-routes.delete('/users/delete/:id', deleteUsersController.handle);
+routes.delete('/student/delete/:id', deleteStudentsController.handle);
 
 routes.get('/users/find', findUsersTokenController.handle);
 
-routes.get('/users/listStudents', getAllUsersController.handle);
+routes.get('/students/listStudents', getAllStudentsController.handle);
 
-routes.get('/users/findUser/:id', findUsersController.handle);
+routes.get('/students/findStudent/:id', findStudentController.handle);
 
 routes.get('/plans/listPlans', listPlansController.handle);
 

@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
 import dayjs from 'dayjs';
-import { DeleteUsersUseCase } from './DeleteUsersUseCase';
+import { DeleteStudentsUseCase } from './DeleteStudentsUseCase';
 
-export class DeleteUsersController {
+export class DeleteStudentsController {
   async handle(request: Request, response: Response) {
     try {
-      const deleteUsersUseCase = new DeleteUsersUseCase();
+      const deleteStudentsController = new DeleteStudentsUseCase();
 
       const id = request.params.id;
 
       console.log(request.body);
 
-      const result = await deleteUsersUseCase.delete(id);
+      const result = await deleteStudentsController.delete(id);
 
       return response.sendStatus(204);
     } catch (error) {

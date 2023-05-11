@@ -8,10 +8,12 @@ const timezone = require('dayjs/plugin/timezone');
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-interface ICreateUsers {
+interface IUpdateStudents {
+  id: string;
   name: string;
   cpf: string;
   email: string;
+  status: boolean;
   password: string;
   birthDate: string;
   weight: string;
@@ -23,14 +25,16 @@ interface ICreateUsers {
   number: string;
   state: string;
   planId: string;
-  createdAt: string;
+  createdAt: string; // Alterado para string
 }
 
-export class CreateUsersUseCase {
+export class UpdateStudentsUseCase {
   async execute({
+    id,
     name,
     cpf,
     email,
+    status,
     password,
     birthDate,
     weight,
@@ -43,36 +47,14 @@ export class CreateUsersUseCase {
     state,
     planId,
     createdAt,
-  }: ICreateUsers) {
+  }: IUpdateStudents) {
+
     // Validar se o usuário existe
-    const userAlreadyExists = await prisma.user.findFirst({
+    const userAlreadyExists = await prisma.student.findUnique({
       where: {
-        email,
+        id,
       },
     });
-
-    if (userAlreadyExists) {
-      throw new Error('User already exists');
-    }
-
-    // Validar se o CPF já está cadastrado
-    const existingCpf = await prisma.user.findFirst({
-      where: {
-        cpf,
-
-      },
-    });
-
-    console.log(existingCpf)
-
-    if (existingCpf) {
-      throw new Error('Cpf já cadastrado');
-    }
-
-    // Converter a data de nascimento para o formato ISO
-    // ---------------------
-
-    console.log('Data de entrada', birthDate)
 
     const dataStr: string = birthDate;
 
@@ -100,23 +82,27 @@ export class CreateUsersUseCase {
 
     const formattedCreatedAt = dayjs().toDate();
 
-    // Verificar se o plano existe antes de salvar o usuário
-    const plan = await prisma.plan.findUnique({
-      where: {
-        id: planId,
-      },
-    });
+    // // Verificar se o plano existe antes de salvar o usuário
+    // const plan = await prisma.plan.findUnique({
+    //   where: {
+    //     id: planId,
+    //   },
+    // });
 
-    if (!plan) {
-      throw new Error('Plan not found');
-    }
+    // if (!plan) {
+    //   throw new Error('Plan not found');
+    // }
 
     // Salvar o usuário
-    const user = await prisma.user.create({
+    const student = await prisma.student.update({
+      where: {
+        id
+      },
       data: {
         name,
         cpf,
         email,
+        status,
         password: passwordHash,
         birthDate: birthdateFormated,
         weight,
@@ -131,6 +117,6 @@ export class CreateUsersUseCase {
         createdAt: formattedCreatedAt,
       },
     });
-    return user;
+    return student;
   }
 }
