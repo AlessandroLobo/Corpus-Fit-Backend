@@ -9,18 +9,18 @@ interface IAuthenticateUserUser {
 
 export class AuthenticateUserCase {
   async execute({ email, password }: IAuthenticateUserUser) {
-    const user = await prisma.user.findFirst({
+    const student = await prisma.student.findFirst({
       where: {
         email
       }
     })
 
-    if (!user) {
+    if (!student) {
       throw new Error('Username or password invalid')
     }
 
     // Verify password
-    const passwordMatch = await compare(password, user.password)
+    const passwordMatch = await compare(password, student.password)
 
     if (!passwordMatch) {
       throw new Error('Username or password invalid')
@@ -28,7 +28,7 @@ export class AuthenticateUserCase {
 
     // Generate a token
     const token = sign({ email }, '46c3931c535d0f1d166026fb1c14550aef5315ad', {
-      subject: user.id,
+      subject: student.id,
       expiresIn: '7d'
     })
     return token

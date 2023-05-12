@@ -17,7 +17,7 @@ export class FindUsersUserTokenCase {
         algorithms: ['HS256'],
       } as VerifyOptions) as JwtPayload
 
-      const user = await prisma.user.findFirst({
+      const student = await prisma.student.findFirst({
         where: {
           email: decoded.email
         },
@@ -28,11 +28,11 @@ export class FindUsersUserTokenCase {
         }
       })
 
-      if (!user) {
+      if (!student) {
         throw new Error('User not found')
       }
 
-      return user;
+      return student;
     } catch (err) {
       console.error('Error validating token:', err)
       return null
