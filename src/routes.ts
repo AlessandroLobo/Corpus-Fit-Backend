@@ -13,6 +13,8 @@ import { FindPlanController } from './modules/plans/findPlan/FindPlanController'
 import { ListPlansController } from './modules/plans/listPlans/ListPlansController';
 import { UpdatePlansController } from './modules/plans/UpdatePlans/UpdatePlansController';
 import { DeletePlansController } from './modules/plans/deletePlans/DeleteUsersController';
+import { CreateStudentPLanController } from './modules/installments/generateInstallments/CreateStudentPLanController';
+import { FindStudentPlanController } from './modules/installments/findPlansGenerate/FindStudentPlanController';
 
 const routes = Router();
 
@@ -30,6 +32,9 @@ const listPlansController = new ListPlansController();
 const createPlansController = new CreatePlansController();
 const updatePlansController = new UpdatePlansController();
 const deletePlansController = new DeletePlansController();
+
+const createStudentPlanController = new CreateStudentPLanController();
+const findStudentPlanController = new FindStudentPlanController();
 
 routes.post('/authenticate/', authenticateUsersController.handle);
 
@@ -54,5 +59,9 @@ routes.get('/plans/findPlan', findPlansController.handle);
 routes.put('/plans/update', updatePlansController.handle);
 
 routes.delete('/plans/delete/:id', deletePlansController.handle);
+
+routes.post('/installments/createStudentPlan', createStudentPlanController.handle);
+routes.get('/installments/findStudentPlan/:id', findStudentPlanController.handle);
+
 
 export { routes };
