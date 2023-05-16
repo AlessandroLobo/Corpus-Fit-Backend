@@ -7,7 +7,6 @@ interface IFindStudentPlanUseCase {
 
 export class FindStudentPlanUseCase {
   async execute({ id }: IFindStudentPlanUseCase) {
-    console.log(id)
     const studentPlans = await prisma.studentPlan.findMany({
       where: {
         studentId: id,
@@ -25,7 +24,6 @@ export class FindStudentPlanUseCase {
       dueDate: dayjs(plan.dueDate).format('DD/MM/YYYY')
     }));
 
-    console.log('StudentPlans--', formattedStudentPlans)
     return formattedStudentPlans;
   }
 }
