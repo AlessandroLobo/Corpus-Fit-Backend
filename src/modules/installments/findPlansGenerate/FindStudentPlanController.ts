@@ -3,7 +3,6 @@ import { FindStudentPlanUseCase } from './FindStudentPlanUseCase';
 
 export class FindStudentPlanController {
   async handle(request: Request, response: Response) {
-    console.log(request.params)
     try {
       const { id } = request.params;
 
