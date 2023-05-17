@@ -16,6 +16,7 @@ import { DeletePlansController } from './modules/plans/deletePlans/DeleteUsersCo
 import { CreateStudentPLanController } from './modules/installments/generateInstallments/CreateStudentPLanController';
 import { FindStudentPlanController } from './modules/installments/findPlansGenerate/FindStudentPlanController';
 import { FindUniqueStudentPlanController } from './modules/installments/findUniquePlansGenerate/FindUniqueStudentPlanController';
+import { CreateMonthlyPaymentController } from './modules/financial/createMonthlyPayment/CreateMonthlyPaymentController';
 
 const routes = Router();
 
@@ -37,6 +38,8 @@ const deletePlansController = new DeletePlansController();
 const createStudentPlanController = new CreateStudentPLanController();
 const findStudentPlanController = new FindStudentPlanController();
 const findUniqueStudentPlanController = new FindUniqueStudentPlanController();
+
+const createMonthlyPaymentController = new CreateMonthlyPaymentController();
 
 routes.post('/authenticate/', authenticateUsersController.handle);
 
@@ -65,6 +68,8 @@ routes.delete('/plans/delete/:id', deletePlansController.handle);
 routes.post('/installments/createStudentPlan', createStudentPlanController.handle);
 routes.get('/installments/findStudentPlan/:id', findStudentPlanController.handle);
 routes.get('/installments/findUniqueStudentPlan/:id', findUniqueStudentPlanController.handle);
+
+routes.post('/financial/createMonthlyPayment', createMonthlyPaymentController.handle);
 
 
 export { routes };

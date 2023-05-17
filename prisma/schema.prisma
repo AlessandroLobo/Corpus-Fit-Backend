@@ -74,6 +74,7 @@ model Financial {
   student       Student      @relation(fields: [studentId], references: [id])
   paymentDate   DateTime
   paymentType   String
+  paymentValue  Float
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
   StudentPlan   StudentPlan? @relation(fields: [studentPlanId], references: [id])

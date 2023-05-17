@@ -7,7 +7,6 @@ interface IFindStudentPlanUseCase {
 
 export class FindUniqueStudentPlanUseCase {
   async execute({ id }: IFindStudentPlanUseCase) {
-    console.log(id)
     const studentPlans = await prisma.studentPlan.findUnique({
       where: {
         id: id,
@@ -29,7 +28,6 @@ export class FindUniqueStudentPlanUseCase {
       dueDate: dayjs(studentPlans.dueDate).format('DD/MM/YYYY')
     });
 
-    console.log('StudentPlans--', formattedStudentPlans);
     return formattedStudentPlans;
 
   }
