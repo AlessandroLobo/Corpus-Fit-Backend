@@ -1,26 +1,38 @@
+import dayjs from "dayjs";
 import { prisma } from "../../../database/prismaClient";
-import dayjs from 'dayjs';
 
-interface IFindStudentPlanUseCase {
-  id: string;
+interface ICreateStudentPlanUseCase {
+  createdAt: string;
+  dueDate: string;
+  planValue: number;
+  planId: string;
+  studentId: string;
 }
 
-export class FindStudentPlanUseCase {
-  async execute({ id }: IFindStudentPlanUseCase) {
-    console.log(id)
-    const studentPlans = await prisma.studentPlan.findMany({
-      where: {
-        studentId: id,
+export class CreateStudentPlanUseCase {
+  async execute({
+    planValue,
+    planId,
+    studentId,
+  }: ICreateStudentPlanUseCase) {
+
+    const formattedCreatedAt = dayjs().toDate();
+
+    const dueDate = dayjs().add(30, 'day').toDate();
+
+    const formattedPlanValue = parseFloat(planValue.toString());
+
+    // Salvar o plano
+    const studentPlan = await prisma.studentPlan.create({
+      data: {
+        createdAt: formattedCreatedAt,
+        dueDate: dueDate,
+        planValue: formattedPlanValue,
+        planId,
+        studentId,
       },
     });
-
-    // Formata a data para o formato desejado
-    const formattedStudentPlans = studentPlans.map(plan => ({
-      ...plan,
-      createdAt: dayjs(plan.createdAt).format('DD/MM/YYYY HH:mm:ss')
-    }));
-
-    console.log('StudentPlans--', formattedStudentPlans)
-    return formattedStudentPlans;
+    console.log(studentPlan)
+    return studentPlan;
   }
 }

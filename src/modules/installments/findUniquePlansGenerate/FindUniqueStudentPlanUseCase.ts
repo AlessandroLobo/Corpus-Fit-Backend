@@ -5,6 +5,10 @@ interface IFindStudentPlanUseCase {
   id: string;
 }
 
+function formatDate(date: Date): string {
+  return dayjs(date).format('DD/MM/YYYY');
+}
+
 export class FindUniqueStudentPlanUseCase {
   async execute({ id }: IFindStudentPlanUseCase) {
     const studentPlans = await prisma.studentPlan.findUnique({
@@ -21,13 +25,30 @@ export class FindUniqueStudentPlanUseCase {
       return [];
     }
 
-    const formattedStudentPlans = Object.assign({}, studentPlans, {
-      plan: undefined,
-      financials: undefined,
-      createdAt: dayjs(studentPlans.createdAt).format('DD/MM/YYYY'),
-      dueDate: dayjs(studentPlans.dueDate).format('DD/MM/YYYY')
+    // Formatação das datas
+    const formattedCreatedAt = formatDate(studentPlans.createdAt);
+    const formattedDueDate = formatDate(studentPlans.dueDate);
+    const formattedFinancials = studentPlans.financials.map(financial => {
+      const formattedPaymentDate = formatDate(financial.paymentDate);
+      const formattedCreatedAt = formatDate(financial.createdAt);
+      const formattedUpdatedAt = formatDate(financial.updatedAt);
+      return {
+        ...financial,
+        paymentDate: formattedPaymentDate,
+        createdAt: formattedCreatedAt,
+        updatedAt: formattedUpdatedAt
+      };
     });
 
+    const formattedStudentPlans = {
+      ...studentPlans,
+      plan: studentPlans.plan,
+      financials: formattedFinancials,
+      createdAt: formattedCreatedAt,
+      dueDate: formattedDueDate
+    };
+
+    console.log(formattedStudentPlans)
     return formattedStudentPlans;
 
   }

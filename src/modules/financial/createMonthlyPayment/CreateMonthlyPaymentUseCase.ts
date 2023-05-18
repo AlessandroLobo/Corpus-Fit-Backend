@@ -17,6 +17,21 @@ export class CreateMonthlyPaymentUseCase {
     studentPlanId,
   }: ICreateMonthlyPaymentUseCase) {
 
+    console.log('Studeante plan vindo do front---------', studentPlanId)
+
+    const studentPlan_Id = await prisma.financial.findFirst({
+      where: {
+        studentPlanId,
+      },
+    });
+
+    console.log('Studente plan vindo do banco######', studentPlan_Id)
+
+    if (studentPlan_Id) {
+
+      throw new Error("Já existe pagamento para esse aluno");
+    }
+
     const currentDate = dayjs().toDate();
 
     // Salvar o plano
