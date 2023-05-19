@@ -32,7 +32,6 @@ export class CreateStudentPlanUseCase {
         studentId,
       },
     });
-    console.log(studentPlan)
     return studentPlan;
   }
 }

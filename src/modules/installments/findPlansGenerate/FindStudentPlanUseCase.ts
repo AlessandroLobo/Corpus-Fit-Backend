@@ -29,8 +29,18 @@ export class FindStudentPlanUseCase {
         updatedAt: dayjs(financial.updatedAt).format('DD/MM/YYYY')
       }))
     }));
-    console.log(formattedStudentPlans);
-    return formattedStudentPlans;
 
+    const maxDueDateResult = await prisma.$queryRaw`SELECT MAX(dueDate) as max FROM student_plans WHERE studentId = ${id};`;
+    const maxDueDate = maxDueDateResult[0].max;
+    // const formattedMaxDueDate = dayjs(maxDueDate).format('DD/MM/YYYY');
+
+
+    console.log(studentPlans);
+    // console.log(formattedMaxDueDate);
+
+    return {
+      formattedStudentPlans,
+      maxDueDate
+    };
   }
 }

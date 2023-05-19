@@ -48,7 +48,6 @@ export class FindUniqueStudentPlanUseCase {
       dueDate: formattedDueDate
     };
 
-    console.log(formattedStudentPlans)
     return formattedStudentPlans;
 
   }
