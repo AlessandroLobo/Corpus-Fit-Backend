@@ -17,6 +17,8 @@ import { CreateStudentPLanController } from './modules/installments/generateInst
 import { FindStudentPlanController } from './modules/installments/findPlansGenerate/FindStudentPlanController';
 import { FindUniqueStudentPlanController } from './modules/installments/findUniquePlansGenerate/FindUniqueStudentPlanController';
 import { CreateMonthlyPaymentController } from './modules/financial/createMonthlyPayment/CreateMonthlyPaymentController';
+import { DeleteMonthlyPaymentController } from './modules/financial/deleteMonthlyPayment/DeleteMonthlyPaymentController';
+import { DeleteStudentPlanController } from './modules/installments/deletePlansGenerate/DeleteStudentPlanController';
 
 const routes = Router();
 
@@ -38,8 +40,10 @@ const deletePlansController = new DeletePlansController();
 const createStudentPlanController = new CreateStudentPLanController();
 const findStudentPlanController = new FindStudentPlanController();
 const findUniqueStudentPlanController = new FindUniqueStudentPlanController();
+const deleteStudentPlanController = new DeleteStudentPlanController();
 
 const createMonthlyPaymentController = new CreateMonthlyPaymentController();
+const deleteMonthlyPaymentController = new DeleteMonthlyPaymentController();
 
 routes.post('/authenticate/', authenticateUsersController.handle);
 
@@ -68,8 +72,11 @@ routes.delete('/plans/delete/:id', deletePlansController.handle);
 routes.post('/installments/createStudentPlan', createStudentPlanController.handle);
 routes.get('/installments/findStudentPlan/:id', findStudentPlanController.handle);
 routes.get('/installments/findUniqueStudentPlan/:id', findUniqueStudentPlanController.handle);
+routes.delete('/installments/deleteStudentPlan/:id', deleteStudentPlanController.handle);
 
 routes.post('/financial/createMonthlyPayment', createMonthlyPaymentController.handle);
+routes.delete('/financial/deleteMonthlyPayment/:id', deleteMonthlyPaymentController.handle);
+
 
 
 export { routes };
