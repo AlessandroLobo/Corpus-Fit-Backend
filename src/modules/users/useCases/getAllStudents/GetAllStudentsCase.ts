@@ -7,12 +7,18 @@ interface GetAllStudentsCaseProps {
   email?: string;
   limit?: number;
   offset?: number;
+
+}
+
+interface MaxDueDate {
+  studentId: number;
+  max: string;
 }
 
 export class GetAllStudentsCase {
   async execute({ id, name, email, limit = 10, offset = 0 }: GetAllStudentsCaseProps) {
 
-    const maxDueDates = await prisma.$queryRaw`SELECT MAX(dueDate) as max, studentId FROM student_plans GROUP BY studentId;`;
+    const maxDueDates = await prisma.$queryRaw<MaxDueDate[]>`SELECT MAX(dueDate) as max, studentId FROM student_plans GROUP BY studentId;`;
     const maxDueDatesMap = Object.fromEntries(maxDueDates.map(({ studentId, max }) => [studentId, max]));
 
     const [users, count] = await Promise.all([
@@ -62,13 +68,14 @@ export class GetAllStudentsCase {
           ]
         }
       });
-      if (hasPlans) {
+
+      if (hasPlans && maxDueDatesMap[user.id]) {
         maxDueDate = formatDate(maxDueDatesMap[user.id]);
       }
+
       return { ...user, maxDueDate };
     }));
 
-    console.log(formattedUsers);
 
     return { users: formattedUsers, total: count };
   }

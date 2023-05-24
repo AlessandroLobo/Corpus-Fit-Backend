@@ -6,7 +6,6 @@ import { GetAllStudentsCase } from './GetAllStudentsCase';
 export class GetAllStudentsController {
   async handle(request: Request, response: Response) {
     const { name, email, limit, offset } = request.query;
-    console.log(name)
     try {
       const getAllStudentsCase = new GetAllStudentsCase();
       const result = await getAllStudentsCase.execute({

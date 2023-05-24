@@ -82,3 +82,37 @@ model Financial {
 
   @@map("financials")
 }
+
+// Derinição do modelo de grupo muscular
+model MuscleGroup {
+  id        String     @id @default(cuid())
+  name      String
+  createdAt DateTime   @default(now())
+  Exercise  Exercise[]
+
+  @@map("muscle_groups")
+}
+
+model ExercisePlan {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+
+  exercises Exercise[] // referência a todos os exercícios associados a este plano
+
+  @@map("exercise_plans")
+}
+
+// Definição do modelo de exercício
+model Exercise {
+  id            String         @id @default(cuid())
+  name          String
+  description   String
+  muscleGroupId String
+  muscleGroup   MuscleGroup    @relation(fields: [muscleGroupId], references: [id])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  exercisePlan  ExercisePlan[] // relacão muitos-para-muitos com exercício(s)
+
+  @@map("exercises")
+}
