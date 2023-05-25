@@ -12,13 +12,17 @@ import { CreatePlansController } from './modules/plans/createPlans/CreatePlansCo
 import { FindPlanController } from './modules/plans/findPlan/FindPlanController';
 import { ListPlansController } from './modules/plans/listPlans/ListPlansController';
 import { UpdatePlansController } from './modules/plans/UpdatePlans/UpdatePlansController';
-import { DeletePlansController } from './modules/plans/deletePlans/DeleteUsersController';
+import { DeletePlansController } from './modules/plans/deletePlans/DeletePlansController';
 import { CreateStudentPLanController } from './modules/installments/generateInstallments/CreateStudentPLanController';
 import { FindStudentPlanController } from './modules/installments/findPlansGenerate/FindStudentPlanController';
 import { FindUniqueStudentPlanController } from './modules/installments/findUniquePlansGenerate/FindUniqueStudentPlanController';
 import { CreateMonthlyPaymentController } from './modules/financial/createMonthlyPayment/CreateMonthlyPaymentController';
 import { DeleteMonthlyPaymentController } from './modules/financial/deleteMonthlyPayment/DeleteMonthlyPaymentController';
 import { DeleteStudentPlanController } from './modules/installments/deletePlansGenerate/DeleteStudentPlanController';
+import { CreateMuscleGroupController } from './modules/trainings/createMuscleGroup/CreateMuscleGroupController';
+import { FindMuscleGroupController } from './modules/trainings/findMuscleGroup/FindMuscleGroupController';
+import { DeleteMuscleGroupsController } from './modules/trainings/deleteMuscleGroup/DeleteMuscleGroupsController';
+import { UpdateMuscleGroupsController } from './modules/trainings/UpdateMuscleGroup/UpdateMuscleGroupsController';
 
 const routes = Router();
 
@@ -44,6 +48,11 @@ const deleteStudentPlanController = new DeleteStudentPlanController();
 
 const createMonthlyPaymentController = new CreateMonthlyPaymentController();
 const deleteMonthlyPaymentController = new DeleteMonthlyPaymentController();
+
+const createMuscleGroupController = new CreateMuscleGroupController();
+const findMuscleGroupController = new FindMuscleGroupController();
+const deleteMuscleGroupController = new DeleteMuscleGroupsController();
+const updateMuscleGroupsController = new UpdateMuscleGroupsController();
 
 routes.post('/authenticate/', authenticateUsersController.handle);
 
@@ -77,6 +86,9 @@ routes.delete('/installments/deleteStudentPlan/:id', deleteStudentPlanController
 routes.post('/financial/createMonthlyPayment', createMonthlyPaymentController.handle);
 routes.delete('/financial/deleteMonthlyPayment/:id', deleteMonthlyPaymentController.handle);
 
-
+routes.post('/trainings/createMuscleGroup', createMuscleGroupController.handle);
+routes.get('/trainings/findMuscleGroup', findMuscleGroupController.handle);
+routes.delete('/trainings/deleteMuscleGroup/:id', deleteMuscleGroupController.handle);
+routes.put('/trainings/updateMuscleGroup', updateMuscleGroupsController.handle);
 
 export { routes };

@@ -1,31 +1,27 @@
+
+
 import dayjs from "dayjs";
 import { prisma } from "../../../database/prismaClient";
 
 
-interface ICreatePlans {
+interface ICreateMuscleGroupUseCase {
   name: string;
-  duration: number;
-  price: number;
   createdAt: string;
 }
 
-export class CreatePlansUseCase {
+export class CreateMuscleGroupUseCase {
   async execute({
     name,
-    duration,
-    price,
     createdAt,
-  }: ICreatePlans) {
+  }: ICreateMuscleGroupUseCase) {
 
     const formattedCreatedAt = dayjs().toDate();
 
 
     // Salvar o plano
-    const plan = await prisma.plan.create({
+    const plan = await prisma.muscleGroup.create({
       data: {
         name,
-        duration,
-        price,
         createdAt: formattedCreatedAt,
       },
     });

@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
-import { DeletePlansUseCase } from './DeleteUsersUseCase';
+import { DeleteMuscleGroupUseCase } from './DeleteMuscleGroupUseCase';
 
 
-export class DeletePlansController {
+export class DeleteMuscleGroupsController {
   async handle(request: Request, response: Response) {
     try {
-      const deletePlansUseCase = new DeletePlansUseCase();
+      const deleteMuscleGroupUseCase = new DeleteMuscleGroupUseCase();
 
       const id = request.params.id;
 
       console.log(request.body);
 
-      const result = await deletePlansUseCase.delete(id);
+      const result = await deleteMuscleGroupUseCase.delete(id);
 
       return response.sendStatus(204);
     } catch (error) {
