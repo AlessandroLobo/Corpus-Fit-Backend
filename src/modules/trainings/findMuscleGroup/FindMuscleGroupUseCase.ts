@@ -21,7 +21,6 @@ export class FindMuscleGroupUseCase {
         name: 'asc'
       },
     });
-    console.log('muscleGroup', muscleGroup)
     return { muscleGroup };
   }
 

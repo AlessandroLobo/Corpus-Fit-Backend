@@ -6,7 +6,6 @@ import { FindMuscleGroupUseCase } from './FindMuscleGroupUseCase';
 export class FindMuscleGroupController {
   async handle(request: Request, response: Response) {
     const { name } = request.query;
-    console.log(name)
 
     try {
       const findMuscleGroupUseCase = new FindMuscleGroupUseCase();

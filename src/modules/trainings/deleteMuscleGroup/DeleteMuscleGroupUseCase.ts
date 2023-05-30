@@ -10,7 +10,6 @@ export class DeleteMuscleGroupUseCase {
         id,
       },
     });
-    console.log(`O plano com id ${id} foi atualizado com sucesso!`);
     return plan;
   }
 }

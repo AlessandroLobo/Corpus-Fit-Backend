@@ -107,7 +107,8 @@ model ExercisePlan {
 model Exercise {
   id            String         @id @default(cuid())
   name          String
-  description   String
+  description   String?
+  url           String
   muscleGroupId String
   muscleGroup   MuscleGroup    @relation(fields: [muscleGroupId], references: [id])
   createdAt     DateTime       @default(now())

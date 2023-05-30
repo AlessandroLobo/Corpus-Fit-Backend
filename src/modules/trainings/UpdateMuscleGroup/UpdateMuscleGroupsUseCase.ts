@@ -24,9 +24,6 @@ export class UpdateMuscleGroupsUseCase {
         createdAt
       },
     });
-
-    console.log(`O plano com id ${id} foi atualizado com sucesso!`);
-
     return muscleGroup;
   }
 }
