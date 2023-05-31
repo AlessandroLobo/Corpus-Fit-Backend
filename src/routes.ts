@@ -21,11 +21,12 @@ import { DeleteMonthlyPaymentController } from './modules/financial/deleteMonthl
 import { DeleteStudentPlanController } from './modules/installments/deletePlansGenerate/DeleteStudentPlanController';
 import { CreateMuscleGroupController } from './modules/trainings/createMuscleGroup/CreateMuscleGroupController';
 import { DeleteMuscleGroupsController } from './modules/trainings/deleteMuscleGroup/DeleteMuscleGroupsController';
-import { UpdateMuscleGroupsController } from './modules/trainings/UpdateMuscleGroup/UpdateMuscleGroupsController';
+import { UpdateMuscleGroupsController } from './modules/trainings/updateMuscleGroup/UpdateMuscleGroupsController';
 import { CreateExerciseController } from './modules/trainings/createExercises/CreateExercisesController';
 import { FindExercisesController } from './modules/trainings/findExercises/FindExercisesController';
 import { FindMuscleGroupController } from './modules/trainings/findMuscleGroup/FindMuscleGroupController';
 import { DeleteExercisesController } from './modules/trainings/deleteExercises/DeleteExercisesController';
+import { UpdateExercisesController } from './modules/trainings/updateExercises/UpdateExercisesController';
 
 const routes = Router();
 
@@ -60,6 +61,8 @@ const updateMuscleGroupsController = new UpdateMuscleGroupsController();
 const createExerciseController = new CreateExerciseController();
 const findExercisesController = new FindExercisesController();
 const deleteExercisesController = new DeleteExercisesController();
+const updateExercisesController = new UpdateExercisesController();
+
 routes.post('/authenticate/', authenticateUsersController.handle);
 
 routes.post('/students/', createStudentsController.handle);
@@ -100,5 +103,6 @@ routes.delete('/trainings/deleteMuscleGroup/:id', deleteMuscleGroupController.ha
 routes.post('/trainings/createExercise', createExerciseController.handle);
 routes.get('/trainings/findExercises', findExercisesController.handle);
 routes.delete('/trainings/deleteExercise/:id', deleteExercisesController.handle);
+routes.put('/trainings/updateExercise', updateExercisesController.handle);
 
 export { routes };
