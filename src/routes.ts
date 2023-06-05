@@ -27,6 +27,8 @@ import { FindExercisesController } from './modules/trainings/findExercises/FindE
 import { FindMuscleGroupController } from './modules/trainings/findMuscleGroup/FindMuscleGroupController';
 import { DeleteExercisesController } from './modules/trainings/deleteExercises/DeleteExercisesController';
 import { UpdateExercisesController } from './modules/trainings/updateExercises/UpdateExercisesController';
+import { CreateWorkoutRoutinesController } from './modules/workout/createRoutine/CreateWorkoutRoutinesController';
+import { CreateTrainingsController } from './modules/workout/createTrainings/CreateTrainingsController';
 
 const routes = Router();
 
@@ -62,6 +64,9 @@ const createExerciseController = new CreateExerciseController();
 const findExercisesController = new FindExercisesController();
 const deleteExercisesController = new DeleteExercisesController();
 const updateExercisesController = new UpdateExercisesController();
+
+const createWorkoutRoutinesController = new CreateWorkoutRoutinesController();
+const createTrainingsController = new CreateTrainingsController();
 
 routes.post('/authenticate/', authenticateUsersController.handle);
 
@@ -104,5 +109,8 @@ routes.post('/trainings/createExercise', createExerciseController.handle);
 routes.get('/trainings/findExercises', findExercisesController.handle);
 routes.delete('/trainings/deleteExercise/:id', deleteExercisesController.handle);
 routes.put('/trainings/updateExercise', updateExercisesController.handle);
+
+routes.post('/workout/createRoutine', createWorkoutRoutinesController.handle);
+routes.post('/workout/createTrainings', createTrainingsController.handle);
 
 export { routes };

@@ -31,6 +31,7 @@ model Student {
   Plan        Plan?         @relation(fields: [planId], references: [id])
   planId      String?
   Financial   Financial[]
+  Routine     Routine[]
 
   @@map("students")
 }
@@ -89,6 +90,7 @@ model MuscleGroup {
   name      String
   createdAt DateTime   @default(now())
   Exercise  Exercise[]
+  Training  Training[]
 
   @@map("muscle_groups")
 }
@@ -114,6 +116,44 @@ model Exercise {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   exercisePlan  ExercisePlan[] // relacão muitos-para-muitos com exercício(s)
+  Training      Training[]
 
   @@map("exercises")
+}
+
+// Definição do modelo de rotinas
+model Routine {
+  id          String  @id @default(cuid())
+  name        String
+  workoutType String?
+  objective   String
+  observation String?
+
+  student   Student?   @relation(fields: [studentId], references: [id])
+  studentId String?
+  trainings Training[]
+
+  startDate DateTime
+  endDate   DateTime
+  createdAt DateTime @default(now())
+
+  @@map("routines")
+}
+
+// Definição do modelo de treinos
+model Training {
+  id              String       @id @default(cuid())
+  name            String
+  muscleGroup     MuscleGroup? @relation(fields: [muscleGroupId], references: [id])
+  muscleGroupId   String?
+  exercise        Exercise?    @relation(fields: [exerciseId], references: [id])
+  exerciseId      String?
+  repetitions     Int?
+  restTimeSeconds Int?
+  weight          Float?
+  routine         Routine      @relation(fields: [routineId], references: [id])
+  routineId       String
+  createdAt       DateTime     @default(now())
+
+  @@map("trainings")
 }
