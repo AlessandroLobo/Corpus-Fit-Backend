@@ -29,6 +29,7 @@ import { DeleteExercisesController } from './modules/trainings/deleteExercises/D
 import { UpdateExercisesController } from './modules/trainings/updateExercises/UpdateExercisesController';
 import { CreateWorkoutRoutinesController } from './modules/workout/createRoutine/CreateWorkoutRoutinesController';
 import { CreateTrainingsController } from './modules/workout/createTrainings/CreateTrainingsController';
+import { FindWorkoutRoutinesController } from './modules/workout/findRoutine/FindWorkoutRoutinesController';
 
 const routes = Router();
 
@@ -67,6 +68,7 @@ const updateExercisesController = new UpdateExercisesController();
 
 const createWorkoutRoutinesController = new CreateWorkoutRoutinesController();
 const createTrainingsController = new CreateTrainingsController();
+const findWorkoutRoutinesController = new FindWorkoutRoutinesController();
 
 routes.post('/authenticate/', authenticateUsersController.handle);
 
@@ -112,5 +114,6 @@ routes.put('/trainings/updateExercise', updateExercisesController.handle);
 
 routes.post('/workout/createRoutine', createWorkoutRoutinesController.handle);
 routes.post('/workout/createTrainings', createTrainingsController.handle);
+routes.get('/workout/findRoutine', findWorkoutRoutinesController.handle);
 
 export { routes };
