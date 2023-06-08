@@ -9,7 +9,7 @@ import { FindStudentController } from './modules/users/useCases/findStudent/Find
 import { DeleteStudentsController } from './modules/users/useCases/DeleteStudents/DeleteStudentsController';
 
 import { CreatePlansController } from './modules/plans/createPlans/CreatePlansController';
-import { FindPlanController } from './modules/plans/findPlan/FindPlanController';
+import { FindPlanController } from './modules/plans/findPlan/findPlanController';
 import { ListPlansController } from './modules/plans/listPlans/ListPlansController';
 import { UpdatePlansController } from './modules/plans/UpdatePlans/UpdatePlansController';
 import { DeletePlansController } from './modules/plans/deletePlans/DeletePlansController';
@@ -29,6 +29,7 @@ import { DeleteExercisesController } from './modules/trainings/deleteExercises/D
 import { UpdateExercisesController } from './modules/trainings/updateExercises/UpdateExercisesController';
 import { CreateWorkoutRoutinesController } from './modules/workout/createRoutine/CreateWorkoutRoutinesController';
 import { CreateTrainingsController } from './modules/workout/createTrainings/CreateTrainingsController';
+import { ListWorkoutRoutinesController } from './modules/workout/listRoutine/ListWorkoutRoutinesController';
 import { FindWorkoutRoutinesController } from './modules/workout/findRoutine/FindWorkoutRoutinesController';
 
 const routes = Router();
@@ -69,6 +70,7 @@ const updateExercisesController = new UpdateExercisesController();
 const createWorkoutRoutinesController = new CreateWorkoutRoutinesController();
 const createTrainingsController = new CreateTrainingsController();
 const findWorkoutRoutinesController = new FindWorkoutRoutinesController();
+const listWorkoutRoutinesController = new ListWorkoutRoutinesController();
 
 routes.post('/authenticate/', authenticateUsersController.handle);
 
@@ -114,6 +116,7 @@ routes.put('/trainings/updateExercise', updateExercisesController.handle);
 
 routes.post('/workout/createRoutine', createWorkoutRoutinesController.handle);
 routes.post('/workout/createTrainings', createTrainingsController.handle);
-routes.get('/workout/findRoutine', findWorkoutRoutinesController.handle);
+routes.get('/workout/findRoutine/:id', findWorkoutRoutinesController.handle);
+routes.get('/workout/listRoutine', listWorkoutRoutinesController.handle);
 
 export { routes };

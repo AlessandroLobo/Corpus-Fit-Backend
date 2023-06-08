@@ -35,7 +35,6 @@ export class CreateWorkoutRoutinesUseCase {
         createdAt: formattedCreatedAt,
       },
     });
-    console.log(workoutRoutines)
     return workoutRoutines;
   }
 }

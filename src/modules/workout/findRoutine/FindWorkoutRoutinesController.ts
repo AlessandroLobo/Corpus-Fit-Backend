@@ -1,17 +1,14 @@
 import { Request, Response } from 'express'
 import { FindWorkoutRoutinesUseCase } from './FindWorkoutRoutinesUseCase';
 
-
-
 export class FindWorkoutRoutinesController {
   async handle(request: Request, response: Response) {
-    const { name } = request.query;
-
+    const { id } = request.params;
+    console.log('findworkout', id)
     try {
       const findWorkoutRoutinesUseCase = new FindWorkoutRoutinesUseCase();
       const result = await findWorkoutRoutinesUseCase.execute({
-        name: name ? String(name) : undefined,
-
+        id,
       });
 
       return response.status(200).json(result);

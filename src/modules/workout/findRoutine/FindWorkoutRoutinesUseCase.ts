@@ -1,28 +1,19 @@
 import { prisma } from "../../../database/prismaClient";
 
 interface IFindWorkoutRoutinesUseCase {
-  name?: string;
-
+  id: string;
 }
 
 export class FindWorkoutRoutinesUseCase {
-  async execute({ name }: IFindWorkoutRoutinesUseCase) {
-    const workoutRoutines = await prisma.routine.findMany({
+  async execute({ id }: IFindWorkoutRoutinesUseCase) {
+    const workoutRoutine = await prisma.routine.findUnique({
       where: {
-        AND: [
-          {
-            OR: [
-              { name: { contains: name || '' } },
-            ]
-          }
-        ]
-      },
-      orderBy: {
-        name: 'asc'
+        id: id,
       },
     });
-    console.log(workoutRoutines)
-    return { workoutRoutines };
-  }
 
+    console.log(workoutRoutine);
+
+    return { workoutRoutine };
+  }
 }

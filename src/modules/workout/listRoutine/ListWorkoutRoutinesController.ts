@@ -1,16 +1,15 @@
 import { Request, Response } from 'express'
-import { FindPlanUseCase } from './findPlanUseCase';
+import { ListWorkoutRoutinesUseCase } from './ListWorkoutRoutinesUseCase';
 
 
 
-export class FindPlanController {
+export class ListWorkoutRoutinesController {
   async handle(request: Request, response: Response) {
     const { name } = request.query;
-    console.log(name)
 
     try {
-      const findPlanUseCase = new FindPlanUseCase();
-      const result = await findPlanUseCase.execute({
+      const listWorkoutRoutinesUseCase = new ListWorkoutRoutinesUseCase();
+      const result = await listWorkoutRoutinesUseCase.execute({
         name: name ? String(name) : undefined,
 
       });
