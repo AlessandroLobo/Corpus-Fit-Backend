@@ -107,16 +107,17 @@ model ExercisePlan {
 
 // Definição do modelo de exercício
 model Exercise {
-  id            String         @id @default(cuid())
+  id            String          @id @default(cuid())
   name          String
   description   String?
   url           String
   muscleGroupId String
-  muscleGroup   MuscleGroup    @relation(fields: [muscleGroupId], references: [id])
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  muscleGroup   MuscleGroup     @relation(fields: [muscleGroupId], references: [id])
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   exercisePlan  ExercisePlan[] // relacão muitos-para-muitos com exercício(s)
   Training      Training[]
+  trainingSheet trainingSheet[]
 
   @@map("exercises")
 }
@@ -142,18 +143,31 @@ model Routine {
 
 // Definição do modelo de treinos
 model Training {
-  id              String       @id @default(cuid())
+  id              String          @id @default(cuid())
   name            String
-  muscleGroup     MuscleGroup? @relation(fields: [muscleGroupId], references: [id])
+  muscleGroup     MuscleGroup?    @relation(fields: [muscleGroupId], references: [id])
   muscleGroupId   String?
-  exercise        Exercise?    @relation(fields: [exerciseId], references: [id])
+  exercise        Exercise?       @relation(fields: [exerciseId], references: [id])
   exerciseId      String?
   repetitions     Int?
   restTimeSeconds Int?
   weight          Float?
-  routine         Routine      @relation(fields: [routineId], references: [id])
+  routine         Routine         @relation(fields: [routineId], references: [id])
   routineId       String
-  createdAt       DateTime     @default(now())
+  createdAt       DateTime        @default(now())
+  trainingSheet   trainingSheet[]
 
   @@map("trainings")
+}
+
+model trainingSheet {
+  id          String    @id @default(cuid())
+  name        String
+  workoutType String?
+  training    Training? @relation(fields: [trainingId], references: [id])
+  trainingId  String?
+  exercise    Exercise? @relation(fields: [exerciseId], references: [id])
+  exerciseId  String?
+
+  @@map("training_Sheet")
 }

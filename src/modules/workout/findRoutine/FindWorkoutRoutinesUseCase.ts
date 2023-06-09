@@ -11,9 +11,6 @@ export class FindWorkoutRoutinesUseCase {
         id: id,
       },
     });
-
-    console.log(workoutRoutine);
-
     return { workoutRoutine };
   }
 }
