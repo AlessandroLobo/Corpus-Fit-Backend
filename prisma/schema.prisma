@@ -117,7 +117,7 @@ model Exercise {
   updatedAt     DateTime        @updatedAt
   exercisePlan  ExercisePlan[] // relacão muitos-para-muitos com exercício(s)
   Training      Training[]
-  trainingSheet trainingSheet[]
+  trainingSheet TrainingSheet[]
 
   @@map("exercises")
 }
@@ -130,9 +130,8 @@ model Routine {
   objective   String
   observation String?
 
-  student   Student?   @relation(fields: [studentId], references: [id])
+  student   Student? @relation(fields: [studentId], references: [id])
   studentId String?
-  trainings Training[]
 
   startDate DateTime
   endDate   DateTime
@@ -152,22 +151,21 @@ model Training {
   repetitions     Int?
   restTimeSeconds Int?
   weight          Float?
-  routine         Routine         @relation(fields: [routineId], references: [id])
-  routineId       String
+  trainingSheet   TrainingSheet[]
+  trainingSheetId String?
   createdAt       DateTime        @default(now())
-  trainingSheet   trainingSheet[]
 
   @@map("trainings")
 }
 
-model trainingSheet {
+model TrainingSheet {
   id          String    @id @default(cuid())
   name        String
   workoutType String?
-  training    Training? @relation(fields: [trainingId], references: [id])
-  trainingId  String?
-  exercise    Exercise? @relation(fields: [exerciseId], references: [id])
+  Exercise    Exercise? @relation(fields: [exerciseId], references: [id])
   exerciseId  String?
+  Training    Training? @relation(fields: [trainingId], references: [id])
+  trainingId  String?
 
   @@map("training_Sheet")
 }

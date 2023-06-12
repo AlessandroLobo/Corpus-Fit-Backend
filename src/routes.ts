@@ -115,8 +115,9 @@ routes.delete('/trainings/deleteExercise/:id', deleteExercisesController.handle)
 routes.put('/trainings/updateExercise', updateExercisesController.handle);
 
 routes.post('/workout/createRoutine', createWorkoutRoutinesController.handle);
-routes.post('/workout/createTrainings', createTrainingsController.handle);
 routes.get('/workout/findRoutine/:id', findWorkoutRoutinesController.handle);
 routes.get('/workout/listRoutine', listWorkoutRoutinesController.handle);
+
+routes.post('/workout/createTrainings', createTrainingsController.handle);
 
 export { routes };

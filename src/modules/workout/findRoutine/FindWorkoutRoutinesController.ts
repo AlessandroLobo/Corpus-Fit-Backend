@@ -4,7 +4,6 @@ import { FindWorkoutRoutinesUseCase } from './FindWorkoutRoutinesUseCase';
 export class FindWorkoutRoutinesController {
   async handle(request: Request, response: Response) {
     const { id } = request.params;
-    console.log('findworkout', id)
     try {
       const findWorkoutRoutinesUseCase = new FindWorkoutRoutinesUseCase();
       const result = await findWorkoutRoutinesUseCase.execute({
