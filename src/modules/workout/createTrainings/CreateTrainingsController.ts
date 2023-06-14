@@ -5,7 +5,6 @@ export class CreateTrainingsController {
   async handle(request: Request, response: Response) {
     try {
       const createTrainingsUseCase = new CreateTrainingsUseCase();
-
       const {
         name,
         muscleGroupId,
@@ -13,9 +12,7 @@ export class CreateTrainingsController {
         repetitions,
         restTimeSeconds,
         weight,
-        routineId,
       } = request.body;
-
       const result = await createTrainingsUseCase.execute({
         name,
         muscleGroupId,
@@ -23,9 +20,7 @@ export class CreateTrainingsController {
         repetitions,
         restTimeSeconds,
         weight,
-        routineId,
       });
-
       return response.status(201).json(result);
     } catch (error) {
       console.log(error);

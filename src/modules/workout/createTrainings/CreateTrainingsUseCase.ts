@@ -7,7 +7,6 @@ interface ICreateTrainingsUseCase {
   repetitions?: number;
   restTimeSeconds?: number;
   weight?: number;
-  routineId: string;
 }
 
 export class CreateTrainingsUseCase {
@@ -18,7 +17,6 @@ export class CreateTrainingsUseCase {
     repetitions,
     restTimeSeconds,
     weight,
-    routineId,
   }: ICreateTrainingsUseCase) {
     // Salvar o treino
     const training = await prisma.training.create({
@@ -29,7 +27,6 @@ export class CreateTrainingsUseCase {
         repetitions,
         restTimeSeconds,
         weight,
-        routine: { connect: { id: routineId } },
       },
     });
 

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateTrainingSheetsUseCase } from './CreateTrainingSheetsUseCase';
 
-export class CreateWorkoutRoutinesController {
+export class CreateTrainingSheetsController {
   async handle(request: Request, response: Response) {
     try {
       const createTrainingSheetsUseCase = new CreateTrainingSheetsUseCase();
