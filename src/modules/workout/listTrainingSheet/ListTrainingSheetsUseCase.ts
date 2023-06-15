@@ -1,27 +1,20 @@
 import { prisma } from "../../../database/prismaClient";
 
 interface IListTrainingSheetsUseCase {
-  name?: string;
-
+  id?: string;
 }
 
 export class ListTrainingSheetsUseCase {
-  async execute({ name }: IListTrainingSheetsUseCase) {
+  async execute({ id }: IListTrainingSheetsUseCase) {
     const trainingSheets = await prisma.trainingSheet.findMany({
       where: {
-        AND: [
-          {
-            OR: [
-              { name: { contains: name || '' } },
-            ]
-          }
-        ]
+        routineId: { equals: id || '' }
       },
       orderBy: {
-        name: 'asc'
+        createdAt: 'asc'
       },
     });
+    console.log('Use', trainingSheets)
     return { trainingSheets };
   }
-
 }

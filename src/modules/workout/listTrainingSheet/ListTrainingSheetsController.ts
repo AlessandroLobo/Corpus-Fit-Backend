@@ -5,12 +5,12 @@ import { ListTrainingSheetsUseCase } from './ListTrainingSheetsUseCase';
 
 export class ListTrainingSheetsController {
   async handle(request: Request, response: Response) {
-    const { name } = request.query;
-
+    const { id } = request.query;
+    console.log(id)
     try {
       const listTrainingSheetsUseCase = new ListTrainingSheetsUseCase();
       const result = await listTrainingSheetsUseCase.execute({
-        name: name ? String(name) : undefined,
+        id: id ? String(id) : undefined,
 
       });
 

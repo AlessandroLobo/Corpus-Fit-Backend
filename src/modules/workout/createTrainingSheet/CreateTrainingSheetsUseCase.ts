@@ -6,6 +6,7 @@ interface ICreateTrainingSheetsUseCase {
   workoutType: string,
   trainingId: string,
   exerciseId: string,
+  routineId: string,
 }
 
 export class CreateTrainingSheetsUseCase {
@@ -14,6 +15,7 @@ export class CreateTrainingSheetsUseCase {
     workoutType,
     trainingId,
     exerciseId,
+    routineId,
   }: ICreateTrainingSheetsUseCase) {
 
     // Salvar a rotina
@@ -23,6 +25,7 @@ export class CreateTrainingSheetsUseCase {
         workoutType,
         trainingId,
         exerciseId,
+        routineId,
       },
     });
     return trainingSheets;

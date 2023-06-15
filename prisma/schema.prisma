@@ -133,9 +133,10 @@ model Routine {
   student   Student? @relation(fields: [studentId], references: [id])
   studentId String?
 
-  startDate DateTime
-  endDate   DateTime
-  createdAt DateTime @default(now())
+  startDate     DateTime
+  endDate       DateTime
+  createdAt     DateTime        @default(now())
+  TrainingSheet TrainingSheet[]
 
   @@map("routines")
 }
@@ -162,10 +163,13 @@ model TrainingSheet {
   id          String    @id @default(cuid())
   name        String
   workoutType String?
-  Exercise    Exercise? @relation(fields: [exerciseId], references: [id])
+  routine     Routine?  @relation(fields: [routineId], references: [id])
+  routineId   String?
+  exercise    Exercise? @relation(fields: [exerciseId], references: [id])
   exerciseId  String?
-  Training    Training? @relation(fields: [trainingId], references: [id])
+  training    Training? @relation(fields: [trainingId], references: [id])
   trainingId  String?
+  createdAt   DateTime  @default(now())
 
   @@map("training_Sheet")
 }

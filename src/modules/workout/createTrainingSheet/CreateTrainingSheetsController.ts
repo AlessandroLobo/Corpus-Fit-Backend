@@ -10,14 +10,16 @@ export class CreateTrainingSheetsController {
         name,
         workoutType,
         trainingId,
-        exerciseId
+        exerciseId,
+        routineId,
       } = request.body;
 
       const result = await createTrainingSheetsUseCase.execute({
         name,
         workoutType,
         trainingId,
-        exerciseId
+        exerciseId,
+        routineId,
       });
 
       return response.status(201).json(result);
