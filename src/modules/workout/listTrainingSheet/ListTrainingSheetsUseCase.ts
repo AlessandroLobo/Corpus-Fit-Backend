@@ -14,7 +14,6 @@ export class ListTrainingSheetsUseCase {
         createdAt: 'asc'
       },
     });
-    console.log('Use', trainingSheets)
     return { trainingSheets };
   }
 }
