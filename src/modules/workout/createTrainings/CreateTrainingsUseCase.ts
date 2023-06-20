@@ -4,6 +4,7 @@ interface ICreateTrainingsUseCase {
   name: string;
   muscleGroupId?: string;
   exerciseId?: string;
+  trainingSheetId?: string;
   repetitions?: number;
   restTimeSeconds?: number;
   weight?: number;
@@ -14,6 +15,7 @@ export class CreateTrainingsUseCase {
     name,
     muscleGroupId,
     exerciseId,
+    trainingSheetId,
     repetitions,
     restTimeSeconds,
     weight,
@@ -22,8 +24,9 @@ export class CreateTrainingsUseCase {
     const training = await prisma.training.create({
       data: {
         name,
-        muscleGroup: { connect: { id: muscleGroupId } },
-        exercise: { connect: { id: exerciseId } },
+        muscleGroupId,
+        exerciseId,
+        trainingSheetId,
         repetitions,
         restTimeSeconds,
         weight,

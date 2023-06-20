@@ -33,6 +33,9 @@ import { ListWorkoutRoutinesController } from './modules/workout/listRoutine/Lis
 import { FindWorkoutRoutinesController } from './modules/workout/findRoutine/FindWorkoutRoutinesController';
 import { CreateTrainingSheetsController } from './modules/workout/createTrainingSheet/CreateTrainingSheetsController';
 import { ListTrainingSheetsController } from './modules/workout/listTrainingSheet/ListTrainingSheetsController';
+import { ListTrainingsController } from './modules/workout/listTrainings/ListTrainingsController';
+import { DeleteTrainingsController } from './modules/workout/deleteTrainings/DeleteTrainingsController';
+import { DeleteTrainingSheetsController } from './modules/workout/deleteTrainingSheet/DeleteTrainingSheetsController';
 
 const routes = Router();
 
@@ -77,6 +80,10 @@ const createTrainingsController = new CreateTrainingsController();
 
 const createTrainingSheetsController = new CreateTrainingSheetsController();
 const listTrainingSheetsController = new ListTrainingSheetsController();
+const deleteTrainingSheetsController = new DeleteTrainingSheetsController();
+
+const deleteTrainingsController = new DeleteTrainingsController();
+const listTrainingsController = new ListTrainingsController();
 
 routes.post('/authenticate/', authenticateUsersController.handle);
 
@@ -128,6 +135,10 @@ routes.post('/workout/createTrainings', createTrainingsController.handle);
 
 routes.post('/workout/createTrainingSheet', createTrainingSheetsController.handle);
 routes.get('/workout/listTrainingSheet', listTrainingSheetsController.handle);
+routes.delete('/workout/deleteTrainingSheet/:id', deleteTrainingSheetsController.handle);
+
+routes.delete('/workout/deleteTrainings/:id', deleteTrainingsController.handle);
+routes.get('/workout/listTrainings', listTrainingsController.handle);
 
 
 export { routes };
