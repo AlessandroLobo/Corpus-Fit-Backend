@@ -141,35 +141,34 @@ model Routine {
   @@map("routines")
 }
 
+model TrainingSheet {
+  id          String     @id @default(cuid())
+  name        String
+  workoutType String?
+  routine     Routine?   @relation(fields: [routineId], references: [id], onDelete: Cascade)
+  routineId   String?
+  exercise    Exercise?  @relation(fields: [exerciseId], references: [id])
+  exerciseId  String?
+  createdAt   DateTime   @default(now())
+  Training    Training[]
+
+  @@map("training_Sheet")
+}
+
 // Definição do modelo de treinos
 model Training {
-  id              String          @id @default(cuid())
+  id              String         @id @default(cuid())
   name            String
-  muscleGroup     MuscleGroup?    @relation(fields: [muscleGroupId], references: [id])
+  muscleGroup     MuscleGroup?   @relation(fields: [muscleGroupId], references: [id])
   muscleGroupId   String?
-  exercise        Exercise?       @relation(fields: [exerciseId], references: [id])
+  exercise        Exercise?      @relation(fields: [exerciseId], references: [id])
   exerciseId      String?
   repetitions     Int?
   restTimeSeconds Int?
   weight          Float?
-  trainingSheet   TrainingSheet[]
+  trainingSheet   TrainingSheet? @relation(fields: [trainingSheetId], references: [id], onDelete: Cascade)
   trainingSheetId String?
-  createdAt       DateTime        @default(now())
+  createdAt       DateTime       @default(now())
 
   @@map("trainings")
-}
-
-model TrainingSheet {
-  id          String    @id @default(cuid())
-  name        String
-  workoutType String?
-  routine     Routine?  @relation(fields: [routineId], references: [id])
-  routineId   String?
-  exercise    Exercise? @relation(fields: [exerciseId], references: [id])
-  exerciseId  String?
-  training    Training? @relation(fields: [trainingId], references: [id])
-  trainingId  String?
-  createdAt   DateTime  @default(now())
-
-  @@map("training_Sheet")
 }
