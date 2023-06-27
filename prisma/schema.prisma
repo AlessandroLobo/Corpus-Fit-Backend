@@ -11,27 +11,28 @@ datasource db {
 
 // Definição do modelo do usuário, incluindo informações de login e detalhes do plano
 model Student {
-  id          String        @id @default(cuid())
-  name        String        @default("N/A")
-  cpf         String        @unique
-  email       String        @unique
-  password    String        @default("N/A")
-  status      Boolean       @default(true)
-  birthDate   DateTime
-  weight      String        @default("N/A")
-  gender      String        @default("N/A")
-  phone       String        @default("N/A")
-  CEP         String        @default("N/A")
-  city        String        @default("N/A")
-  address     String        @default("N/A")
-  number      String        @default("N/A")
-  state       String        @default("N/A")
-  createdAt   DateTime      @default(now())
-  StudentPlan StudentPlan[]
-  Plan        Plan?         @relation(fields: [planId], references: [id])
-  planId      String?
-  Financial   Financial[]
-  Routine     Routine[]
+  id             String           @id @default(cuid())
+  name           String           @default("N/A")
+  cpf            String           @unique
+  email          String           @unique
+  password       String           @default("N/A")
+  status         Boolean          @default(true)
+  birthDate      DateTime
+  weight         String           @default("N/A")
+  gender         String           @default("N/A")
+  phone          String           @default("N/A")
+  CEP            String           @default("N/A")
+  city           String           @default("N/A")
+  address        String           @default("N/A")
+  number         String           @default("N/A")
+  state          String           @default("N/A")
+  createdAt      DateTime         @default(now())
+  StudentPlan    StudentPlan[]
+  Plan           Plan?            @relation(fields: [planId], references: [id])
+  planId         String?
+  Financial      Financial[]
+  Routine        Routine[]
+  StudentRoutine StudentRoutine[]
 
   @@map("students")
 }
@@ -133,10 +134,11 @@ model Routine {
   student   Student? @relation(fields: [studentId], references: [id])
   studentId String?
 
-  startDate     DateTime
-  endDate       DateTime
-  createdAt     DateTime        @default(now())
-  TrainingSheet TrainingSheet[]
+  startDate      DateTime
+  endDate        DateTime
+  createdAt      DateTime         @default(now())
+  TrainingSheet  TrainingSheet[]
+  StudentRoutine StudentRoutine[]
 
   @@map("routines")
 }
@@ -171,4 +173,17 @@ model Training {
   createdAt       DateTime       @default(now())
 
   @@map("trainings")
+}
+
+// Definição do modelo de associação entre estudante e rotinas de treino
+model StudentRoutine {
+  id        String   @id @default(cuid())
+  name      String
+  student   Student  @relation(fields: [studentId], references: [id])
+  studentId String
+  routine   Routine  @relation(fields: [routineId], references: [id])
+  routineId String
+  createdAt DateTime @default(now())
+
+  @@map("student_routines")
 }

@@ -37,6 +37,9 @@ import { ListTrainingsController } from './modules/workout/listTrainings/ListTra
 import { DeleteTrainingsController } from './modules/workout/deleteTrainings/DeleteTrainingsController';
 import { DeleteTrainingSheetsController } from './modules/workout/deleteTrainingSheet/DeleteTrainingSheetsController';
 import { DeleteRoutinesController } from './modules/workout/deleteRoutine/DeleteRoutinesController';
+import { CreateStudentRoutinesController } from './modules/workout/createStudentRoutine/CreateStudentRoutinesController';
+import { FindStudentRoutinesController } from './modules/workout/findStudentRoutine/FindStudentRoutinesController';
+import { ListStudentRoutinesController } from './modules/workout/listStudentRoutine/ListStudentRoutinesController';
 
 const routes = Router();
 
@@ -87,6 +90,10 @@ const deleteTrainingSheetsController = new DeleteTrainingSheetsController();
 const deleteTrainingsController = new DeleteTrainingsController();
 const listTrainingsController = new ListTrainingsController();
 
+const createStudentRoutinesController = new CreateStudentRoutinesController();
+const findStudentRoutinesController = new FindStudentRoutinesController();
+const listStudentRoutinesController = new ListStudentRoutinesController();
+
 routes.post('/authenticate/', authenticateUsersController.handle);
 
 routes.post('/students/', createStudentsController.handle);
@@ -110,6 +117,7 @@ routes.get('/plans/findPlan', findPlansController.handle);
 routes.put('/plans/update', updatePlansController.handle);
 
 routes.delete('/plans/delete/:id', deletePlansController.handle);
+
 
 routes.post('/installments/createStudentPlan', createStudentPlanController.handle);
 routes.get('/installments/findStudentPlan/:id', findStudentPlanController.handle);
@@ -143,5 +151,8 @@ routes.delete('/workout/deleteTrainingSheet/:id', deleteTrainingSheetsController
 routes.delete('/workout/deleteTrainings/:id', deleteTrainingsController.handle);
 routes.get('/workout/listTrainings', listTrainingsController.handle);
 
+routes.post('/workout/createStudentRoutine', createStudentRoutinesController.handle);
+routes.get('/workout/findStudentRoutine/:id', findStudentRoutinesController.handle);
+routes.get('/workout/listStudentRoutine', listStudentRoutinesController.handle);
 
 export { routes };
