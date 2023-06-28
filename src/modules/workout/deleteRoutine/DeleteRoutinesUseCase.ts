@@ -11,7 +11,6 @@ export class DeleteRoutinesUseCase {
         id,
       },
     });
-    console.log('exercise', trainings)
     return trainings;
   }
 }

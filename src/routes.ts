@@ -40,6 +40,7 @@ import { DeleteRoutinesController } from './modules/workout/deleteRoutine/Delete
 import { CreateStudentRoutinesController } from './modules/workout/createStudentRoutine/CreateStudentRoutinesController';
 import { FindStudentRoutinesController } from './modules/workout/findStudentRoutine/FindStudentRoutinesController';
 import { ListStudentRoutinesController } from './modules/workout/listStudentRoutine/ListStudentRoutinesController';
+import { DeleteStudentRoutineController } from './modules/workout/deleteStudentRoutine/DeleteStudentRoutineController';
 
 const routes = Router();
 
@@ -93,6 +94,7 @@ const listTrainingsController = new ListTrainingsController();
 const createStudentRoutinesController = new CreateStudentRoutinesController();
 const findStudentRoutinesController = new FindStudentRoutinesController();
 const listStudentRoutinesController = new ListStudentRoutinesController();
+const deleteStudentRoutineController = new DeleteStudentRoutineController();
 
 routes.post('/authenticate/', authenticateUsersController.handle);
 
@@ -154,5 +156,6 @@ routes.get('/workout/listTrainings', listTrainingsController.handle);
 routes.post('/workout/createStudentRoutine', createStudentRoutinesController.handle);
 routes.get('/workout/findStudentRoutine/:id', findStudentRoutinesController.handle);
 routes.get('/workout/listStudentRoutine', listStudentRoutinesController.handle);
+routes.delete('/workout/deleteStudentRoutine/:id', deleteStudentRoutineController.handle);
 
 export { routes };

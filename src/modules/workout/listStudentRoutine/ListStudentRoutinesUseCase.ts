@@ -14,7 +14,6 @@ export class ListStudentRoutinesUseCase {
         createdAt: 'asc'
       },
     });
-    console.log('student routine api', studentRoutines)
     return { studentRoutines };
   }
 }
