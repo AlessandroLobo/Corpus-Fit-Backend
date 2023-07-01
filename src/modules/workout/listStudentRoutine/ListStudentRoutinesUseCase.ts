@@ -10,6 +10,9 @@ export class ListStudentRoutinesUseCase {
       where: {
         studentId: { equals: id || '' }
       },
+      include: {
+        routine: true
+      },
       orderBy: {
         createdAt: 'asc'
       },
