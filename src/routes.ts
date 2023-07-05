@@ -41,6 +41,7 @@ import { CreateStudentRoutinesController } from './modules/workout/createStudent
 import { FindStudentRoutinesController } from './modules/workout/findStudentRoutine/FindStudentRoutinesController';
 import { ListStudentRoutinesController } from './modules/workout/listStudentRoutine/ListStudentRoutinesController';
 import { DeleteStudentRoutineController } from './modules/workout/deleteStudentRoutine/DeleteStudentRoutineController';
+import { UpdateTrainingsController } from './modules/workout/updateTrainings/UpdateTrainingsController';
 
 const routes = Router();
 
@@ -90,6 +91,7 @@ const deleteTrainingSheetsController = new DeleteTrainingSheetsController();
 
 const deleteTrainingsController = new DeleteTrainingsController();
 const listTrainingsController = new ListTrainingsController();
+const updateTrainingsController = new UpdateTrainingsController();
 
 const createStudentRoutinesController = new CreateStudentRoutinesController();
 const findStudentRoutinesController = new FindStudentRoutinesController();
@@ -152,6 +154,7 @@ routes.delete('/workout/deleteTrainingSheet/:id', deleteTrainingSheetsController
 
 routes.delete('/workout/deleteTrainings/:id', deleteTrainingsController.handle);
 routes.get('/workout/listTrainings', listTrainingsController.handle);
+routes.put('/workout/updateTrainings', updateTrainingsController.handle);
 
 routes.post('/workout/createStudentRoutine', createStudentRoutinesController.handle);
 routes.get('/workout/findStudentRoutine/:id', findStudentRoutinesController.handle);
