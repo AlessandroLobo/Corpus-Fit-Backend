@@ -6,7 +6,6 @@ import { ListTrainingsUseCase } from './ListTrainingsUseCase';
 export class ListTrainingsController {
   async handle(request: Request, response: Response) {
     const { id } = request.query;
-    console.log(id)
     try {
       const listTrainingsUseCase = new ListTrainingsUseCase();
       const result = await listTrainingsUseCase.execute({
