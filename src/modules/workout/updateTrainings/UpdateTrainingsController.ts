@@ -3,7 +3,6 @@ import { UpdateTrainingsUseCase } from './UpdateTrainingsUseCase';
 
 export class UpdateTrainingsController {
   async handle(request: Request, response: Response) {
-    console.log('Request body', request.body)
     try {
       const updateTrainingsUseCase = new UpdateTrainingsUseCase();
 

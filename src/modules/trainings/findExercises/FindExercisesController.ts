@@ -4,7 +4,6 @@ import { FindExercisesUseCase } from './FindExercisesUseCase';
 export class FindExercisesController {
   async handle(request: Request, response: Response) {
     const { name, muscleGroupId } = request.query;
-    console.log(name)
 
     try {
       const findExercisesUseCase = new FindExercisesUseCase();
