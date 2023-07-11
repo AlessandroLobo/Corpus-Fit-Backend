@@ -10,6 +10,13 @@ export class ListTrainingSheetsUseCase {
       where: {
         routineId: { equals: id || '' }
       },
+      include: {
+        Training: {
+          include: {
+            exercise: true
+          }
+        }
+      },
       orderBy: {
         createdAt: 'asc'
       },

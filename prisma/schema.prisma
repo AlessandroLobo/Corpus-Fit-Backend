@@ -147,6 +147,7 @@ model TrainingSheet {
   id          String     @id @default(cuid())
   name        String
   workoutType String?
+  duration    Int?
   routine     Routine?   @relation(fields: [routineId], references: [id], onDelete: Cascade)
   routineId   String?
   exercise    Exercise?  @relation(fields: [exerciseId], references: [id])
