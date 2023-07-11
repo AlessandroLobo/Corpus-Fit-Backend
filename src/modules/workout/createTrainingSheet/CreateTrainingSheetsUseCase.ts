@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 interface ICreateTrainingSheetsUseCase {
   name: string,
   workoutType: string,
-  trainingId: string,
+  duration: number,
   exerciseId: string,
   routineId: string,
 }
@@ -13,7 +13,7 @@ export class CreateTrainingSheetsUseCase {
   async execute({
     name,
     workoutType,
-    trainingId,
+    duration,
     exerciseId,
     routineId,
   }: ICreateTrainingSheetsUseCase) {
@@ -23,7 +23,7 @@ export class CreateTrainingSheetsUseCase {
       data: {
         name,
         workoutType,
-        trainingId,
+        duration,
         exerciseId,
         routineId,
       },

@@ -9,7 +9,7 @@ export class CreateTrainingSheetsController {
       const {
         name,
         workoutType,
-        trainingId,
+        duration,
         exerciseId,
         routineId,
       } = request.body;
@@ -17,7 +17,7 @@ export class CreateTrainingSheetsController {
       const result = await createTrainingSheetsUseCase.execute({
         name,
         workoutType,
-        trainingId,
+        duration,
         exerciseId,
         routineId,
       });
