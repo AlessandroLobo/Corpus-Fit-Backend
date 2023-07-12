@@ -2,6 +2,7 @@ import { prisma } from "../../../database/prismaClient";
 
 interface IUpdateTrainingsUseCase {
   id: string;
+  sets,
   repetitions?: number;
   restTimeSeconds?: number;
   weight?: number;
@@ -10,12 +11,17 @@ interface IUpdateTrainingsUseCase {
 export class UpdateTrainingsUseCase {
   async execute({
     id,
+    sets,
     repetitions,
     restTimeSeconds,
     weight,
   }: IUpdateTrainingsUseCase) {
     // Salvar o plano
     const data: Record<string, number> = {};
+    
+    if (sets !== undefined) {
+      data.sets = sets;
+    }
 
     if (repetitions !== undefined) {
       data.repetitions = repetitions;

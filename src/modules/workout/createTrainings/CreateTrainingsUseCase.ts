@@ -5,6 +5,7 @@ interface ICreateTrainingsUseCase {
   muscleGroupId?: string;
   exerciseId?: string;
   trainingSheetId?: string;
+  sets?: number;
   repetitions?: number;
   restTimeSeconds?: number;
   weight?: number;
@@ -16,6 +17,7 @@ export class CreateTrainingsUseCase {
     muscleGroupId,
     exerciseId,
     trainingSheetId,
+    sets,
     repetitions,
     restTimeSeconds,
     weight,
@@ -27,6 +29,7 @@ export class CreateTrainingsUseCase {
         muscleGroupId,
         exerciseId,
         trainingSheetId,
+        sets,
         repetitions,
         restTimeSeconds,
         weight,

@@ -8,6 +8,7 @@ export class UpdateTrainingsController {
 
       const {
         id,
+        sets,
         repetitions,
         restTimeSeconds,
         weight,
@@ -17,6 +18,7 @@ export class UpdateTrainingsController {
 
       const result = await updateTrainingsUseCase.execute({
         id,
+        sets,
         repetitions,
         restTimeSeconds,
         weight,

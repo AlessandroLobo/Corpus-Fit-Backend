@@ -167,6 +167,7 @@ model Training {
   exercise        Exercise?      @relation(fields: [exerciseId], references: [id])
   exerciseId      String?
   repetitions     Int?
+  sets            Int?
   restTimeSeconds Int?
   weight          Float?
   trainingSheet   TrainingSheet? @relation(fields: [trainingSheetId], references: [id], onDelete: Cascade)
